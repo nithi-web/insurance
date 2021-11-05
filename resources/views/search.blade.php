@@ -45,7 +45,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-sm-4 col-md-6">
-                <h1 class="search">Results..</h1> <br>
+                <h1 class="search">Results</h1> <br>
                 <table border="1" class="table table-striped">
                     <tr class="searchhead">
                         <td>Policy Id</td>
