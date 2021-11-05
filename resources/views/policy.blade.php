@@ -42,7 +42,7 @@
             <div class="col-lg-12 col-sm-4 col-md-6">
 
 
-                <h1>Fill Policy Details..</h1><br><br>
+                <h1>Fill Policy Details</h1><br><br>
                 @if(session('success'))
                 <div class="alert alert-success">{{session('success')}}</div>
                 @endif

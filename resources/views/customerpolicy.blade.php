@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-12 col-sm-4 col-md-6">
 
-        <h1>Fill Customer Details..</h1><br><br>
+        <h1>Fill Customer Details</h1><br><br>
 
         <form action="/insert_customer" method="post" id="forms">
           <div class="form-group row has-success">
