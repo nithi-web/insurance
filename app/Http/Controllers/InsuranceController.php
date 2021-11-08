@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class InsuranceController extends Controller
 {
-
     public function create_customer()
     {
         return view('customerpolicy');
@@ -20,7 +19,6 @@ class InsuranceController extends Controller
 
     public function insert_customer(Request $request)
     {
-
         $customer = new Customer();
         $customer->first_name = $request->first_name;
         $customer->phone_number = $request->phone_number;
@@ -89,10 +87,8 @@ class InsuranceController extends Controller
         return view('home', compact('customer'), compact('customerexp'));
     }
 
-
     public function listofcust()
     {
-
         $customer = Customer::all();
         $customer = DB::table('customers')
             ->orderBy('created_at', 'desc')
@@ -104,7 +100,6 @@ class InsuranceController extends Controller
 
     public function allpolicy()
     {
-
         $customer = DB::table('policies')
             ->join('customers', 'customers.id', '=', 'policies.customer_id')
             ->select('customers.id', 'customers.first_name', 'customers.phone_number', 'customers.place', 'policies.vehicle_name', 'policies.registration_number', 'policies.policy_amount', 'policies.issued_date', 'policies.expiry_date', 'policies.id', 'policies.customer_id', 'customers.deleted_at', 'policies.deleted_at')
@@ -136,7 +131,6 @@ class InsuranceController extends Controller
 
     public function policy_delete(Request $request)
     {
-
         $policy = Policy::find($request->id);
         $policy->delete();
         return "success";
@@ -144,7 +138,6 @@ class InsuranceController extends Controller
 
     public function customer_delete(Request $request)
     {
-
         $custdelete = Customer::find($request->id);
         $custdelete->delete();
         return "success";
@@ -155,6 +148,7 @@ class InsuranceController extends Controller
         $policy = Policy::find($id);
         return view('allpolicyupdate', compact('policy'));
     }
+
     public function allpolicy_update(Request $request)
     {
         $policy = Policy::find($request->id);
@@ -178,8 +172,6 @@ class InsuranceController extends Controller
 
     public function policy_home_update(Request $request)
     {
-
-
         $policy = Policy::find($request->id);
         $policy->vehicle_name = $request->vehicle_name;
         $policy->customer_id = $request->customer_id;
@@ -202,13 +194,11 @@ class InsuranceController extends Controller
         return view('search', compact('customer'));
     }
 
-
     public function customer_edit($id)
     {
         $cust = Customer::find($id);
         return view('customerupdate', compact('cust'));
     }
-
 
     public function customer_update(Request $request)
     {
