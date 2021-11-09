@@ -21,7 +21,7 @@ class InsuranceController extends Controller
     // Insert through service class
     public function insert(Request $request)
     {
-        $customer = (new CustomerSaveService)->insert_customer($request);
+        (new CustomerSaveService)->insert_customer($request);
         return redirect("/listofcust")->with('success', 'Customer inserted');
     }
 
