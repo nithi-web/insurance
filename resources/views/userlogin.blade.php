@@ -55,7 +55,14 @@
         <div class="row">
             <div class="col-lg-12 col-sm-4 col-md-6">
 
+
+
+
+
                 <div class="main">
+                    @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                    @endif
                     <form action="/" method="post">
                         <h1>United Vehicle Insurance</h1>
                         <h3>Please Login</h3><br>

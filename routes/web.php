@@ -33,7 +33,7 @@ Route::get('/', function () {
 Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], function () {
 
     Route::get('/create_customer', 'InsuranceController@create_customer');
-    Route::post('/insert_customer', 'InsuranceController@insert_customer');
+    Route::post('/insert_customer', 'InsuranceController@insert');
     Route::get('/create_policy', 'InsuranceController@create_policy');
     Route::post('/policy_insert', 'InsuranceController@policy_insert');
     Route::get('/home', 'InsuranceController@home');

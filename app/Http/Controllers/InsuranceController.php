@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use  App\Models\Customer;
+use  App\Services\CustomerSaveService;
 use  App\Models\Policy;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -17,16 +18,23 @@ class InsuranceController extends Controller
         return view('customerpolicy');
     }
 
-    public function insert_customer(Request $request)
+    // Insert through service class
+    public function insert(Request $request)
     {
-        $customer = new Customer();
-        $customer->first_name = $request->first_name;
-        $customer->phone_number = $request->phone_number;
-        $customer->address = $request->address;
-        $customer->place = $request->place;
-        $customer->save();
+        $customer = (new CustomerSaveService)->insert_customer($request);
         return redirect("/listofcust")->with('success', 'Customer inserted');
     }
+
+    // public function insert_customer(Request $request)
+    // {
+    //     $customer = new Customer();
+    //     $customer->first_name = $request->first_name;
+    //     $customer->phone_number = $request->phone_number;
+    //     $customer->address = $request->address;
+    //     $customer->place = $request->place;
+    //     $customer->save();
+    //     return redirect("/listofcust")->with('success', 'Customer inserted');
+    // }
 
     public function user_login()
     {
@@ -40,7 +48,7 @@ class InsuranceController extends Controller
         if (auth::attempt($userdata)) {
             return redirect('home');
         } else {
-            return "Invalid user";
+            return redirect('/')->with('success', 'Invalid User');
         }
     }
 
@@ -166,7 +174,6 @@ class InsuranceController extends Controller
     public function allpolicy_home_edit($id)
     {
         $policy = Policy::find($id);
-
         return view('allpolicyhomeupdate', compact('policy'));
     }
 
