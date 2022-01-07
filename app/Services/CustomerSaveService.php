@@ -9,7 +9,7 @@ use  App\Models\Customer;
 class CustomerSaveService
 {
     // public $customer;
-    public function insert_customer(Request $request)
+    public static function insert_customer(Request $request)
     {
         $customer = new Customer();
         $customer->first_name = $request->first_name;

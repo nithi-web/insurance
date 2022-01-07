@@ -21,7 +21,9 @@ class InsuranceController extends Controller
     // Insert through service class
     public function insert(Request $request)
     {
-        (new CustomerSaveService)->insert_customer($request);
+        // (new CustomerSaveService())->insert_customer($request);
+        // Use static method
+        CustomerSaveService::insert_customer($request);
         return redirect("/listofcust")->with('success', 'Customer inserted');
     }
 
@@ -130,6 +132,30 @@ class InsuranceController extends Controller
     //         ->get();
     //     return view('exp', compact('customer'));
     // }
+
+    public function exp()
+    {
+
+        $dat = Carbon::now()->addDays(30);
+        $nowday = Carbon::now();
+        $customerexp = DB::table('policies')
+            ->join('customers', 'customers.id', '=', 'policies.customer_id')
+            ->select('customers.id', 'customers.first_name', 'customers.phone_number', 'customers.place', 'policies.vehicle_name', 'policies.registration_number', 'policies.policy_amount', 'policies.issued_date', 'policies.expiry_date', 'policies.id', 'policies.customer_id', 'customers.deleted_at', 'policies.deleted_at')
+            ->whereBetween('expiry_date', [$nowday, $dat])
+            ->whereNull('policies.deleted_at')
+            ->orderBy('expiry_date', 'asc')
+            ->paginate(8);
+
+        $date = Carbon::now();
+        $customer = DB::table('policies')
+            ->join('customers', 'customers.id', '=', 'policies.customer_id')
+            ->select('customers.id', 'customers.first_name', 'customers.phone_number', 'customers.place', 'policies.vehicle_name', 'policies.registration_number', 'policies.policy_amount', 'policies.issued_date', 'policies.expiry_date', 'policies.id', 'policies.customer_id', 'customers.deleted_at', 'policies.deleted_at')
+            ->where('expiry_date', '<=', $date)
+            ->whereNull('policies.deleted_at')
+            ->orderBy('expiry_date', 'asc')
+            ->paginate(8);
+        return view('exp', compact('customer'), compact('customerexp'));
+    }
 
     public function logout()
     {

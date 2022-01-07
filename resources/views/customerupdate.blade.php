@@ -109,8 +109,6 @@
                     place: {
                         required: true
                     },
-
-
                 },
 
             });
