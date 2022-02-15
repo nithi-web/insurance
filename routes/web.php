@@ -43,7 +43,11 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
         'uses' => 'InsuranceController@allpolicy',
     ]);
     Route::get('/logout', 'InsuranceController@logout');
-    Route::get('/exp', 'InsuranceController@exp');
+    // Route::get('/exp', 'InsuranceController@exp');
+    Route::get('/exp', [
+        'as' => 'admin.exp.index',
+        'uses' => 'InsuranceController@exp',
+    ]);
     Route::post('/policy_delete', 'InsuranceController@policy_delete');
     Route::post('/customer_delete', 'InsuranceController@customer_delete');
     Route::get('/allpolicy_edit/{id}', 'InsuranceController@allpolicy_edit');

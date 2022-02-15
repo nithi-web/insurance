@@ -45,7 +45,14 @@
         }
 
         body {
-            background-color: lightskyblue;
+            background: url("../public/img/about-img.jpg") no-repeat center center fixed;
+            /* background-color: lightskyblue; */
+            background-size: cover;
+            font-size: 16px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            margin: 0;
+            color: #666;
         }
     </style>
 </head>
